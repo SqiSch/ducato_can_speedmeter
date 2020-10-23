@@ -7,6 +7,9 @@ Order the board with a pre installed chip45bootSAM Bootloader. It´s super easy 
 
 ## Instrument cluster / Kombinstrument pins
 
+![Kombiinstrument](documentation/images/pins.png "Kombiinstrument")
+![Kombiinstrument2](documentation/images/IMG_20201023_101301.jpg "Kombiinstrument2")
+![Kombiinstrument3](documentation/images/IMG_20201023_101332.jpg "Kombiinstrument3")
 
 
 
