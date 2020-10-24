@@ -28,7 +28,7 @@ Order the board with a pre installed chip45bootSAM Bootloader. It´s super easy 
 ```
 
 
-### Set SamC21 to receive all can messages:
+#### Set SamC21 to receive all can messages:
 ```
 hal/include/hpl_can.h
 struct can_filter {
@@ -38,42 +38,24 @@ struct can_filter {
 	
 };
 
-
 hpl/can/hpl_can.c
 /**
  * \brief Set CAN to the specified mode
  */
-int32_t _can_async_set_filter(struct _can_async_device *const dev, uint8_t index, enum can_format fmt,
-                              struct can_filter *filter)
+int32_t _can_async_set_filter(struct _can_async_device *const dev, uint8_t index, enum can_format fmt, struct can_filter *filter)
 {
-	struct _can_standard_message_filter_element *sf;
-	struct _can_extended_message_filter_element *ef;
-
-	sf = &((struct _can_context *)dev->context)->rx_std_filter[index];
-	ef = &((struct _can_context *)dev->context)->rx_ext_filter[index];
-
-	if (fmt == CAN_FMT_STDID) {
-		if (filter == NULL) {
-			sf->S0.val = 0;
-			return ERR_NONE;
-		}
+.....
 		sf->S0.val       = filter->mask;
 		sf->S0.bit.SFID1 = filter->idEnd;
 		sf->S0.bit.SFID2 = filter->idStart;
-		sf->S0.bit.SFT   = _CAN_SFT_CLASSIC;
-		sf->S0.bit.SFEC  = _CAN_SFEC_STF0M;
+.....
 	} else if (fmt == CAN_FMT_EXTID) {
 		if (filter == NULL) {
 			ef->F0.val = 0;
 			return ERR_NONE;
 		}
 		ef->F0.val      = filter->idStart;
-		ef->F0.bit.EFEC = _CAN_EFEC_STF0M;
-		ef->F1.val      = filter->mask;
-		ef->F1.bit.EFT  = _CAN_EFT_CLASSIC;
-	}
-
-	return ERR_NONE;
+.....
 }
 
 
